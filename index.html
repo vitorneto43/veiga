@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Veiga • Software, Apps & IA</title>
+  <meta name="description" content="Criação de softwares, aplicativos e inteligência artificial focados em resultado." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Veiga • Software, Apps & IA" />
+  <meta property="og:description" content="Criação de softwares, aplicativos e IA focados em resultado." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://picsum.photos/1200/630?random=1" />
+
+  <style>
+    /* ======= Design tokens ======= */
+    :root{
+      --bg:#0b0d12;
+      --card:#141926;
+      --stroke:#242f41;
+      --brand:#2a7df0;
+      --brand-2:#18e0b5;
+      --text:#e8eefc;
+      --muted:#a9b7d6;
+      --rad:18px;
+      --shadow:0 10px 30px rgba(8,10,15,.35);
+      --container:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,sans-serif}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--container);margin:auto;padding:0 20px}
+
+    /* ======= Header / Nav ======= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      -webkit-backdrop-filter: saturate(140%) blur(8px); /* Safari */
+      backdrop-filter: saturate(140%) blur(8px);
+      background: rgba(11,13,18,.6);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.4px}
+    .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 3px rgba(255,255,255,.06) inset}
+    .menu{display:flex;gap:24px;align-items:center}
+    .menu a{opacity:.9}
+    .menu a:hover{opacity:1}
+    .cta{padding:10px 16px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));font-weight:700;box-shadow:var(--shadow)}
+    .burger{display:none;flex-direction:column;gap:5px}
+    .burger span{width:26px;height:2px;background:#cfe0ff;border-radius:2px}
+
+    /* ======= Hero ======= */
+    .hero{padding:72px 0 40px;position:relative;overflow:hidden}
+    .hero .grid{display:grid;gap:40px;grid-template-columns:1.1fr .9fr;align-items:center}
+    .chip{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--stroke);border-radius:999px;background:rgba(255,255,255,.03);color:var(--muted);font-size:.9rem}
+    .chip b{color:#fff}
+    h1{font-size:clamp(32px,4vw,54px);line-height:1.05;margin:16px 0}
+    .lead{color:var(--muted);font-size:clamp(16px,2.1vw,20px)}
+    .buttons{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:12px 18px;border:1px solid var(--stroke);border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));transition:.2s;display:inline-flex;gap:10px;align-items:center}
+    .btn:hover{transform:translateY(-1px);border-color:#35507a}
+    .btn.primary{border:none;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#051020;font-weight:800;box-shadow:var(--shadow)}
+    .hero-visual{position:relative}
+    .hero-card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--rad);padding:18px;box-shadow:var(--shadow);transform:rotate(-2deg)}
+    .badges{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .badge{padding:8px 10px;border-radius:999px;background:#0f1420;border:1px dashed #2e3a52;font-size:.82rem;color:#b9c8e6}
+
+    /* ======= Sections ======= */
+    section{padding:64px 0;border-top:1px solid rgba(255,255,255,.05)}
+    .section-title{font-size:28px;margin:0 0 24px}
+    .muted{color:var(--muted)}
+
+    /* About */
+    .about{display:grid;gap:26px;grid-template-columns:1fr 1fr}
+    .about .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--rad);padding:20px;box-shadow:var(--shadow)}
+    .kpis{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+    .kpi{padding:16px;border-radius:16px;border:1px dashed #2b3750;background:#0f1420;text-align:center}
+    .kpi b{font-size:26px;display:block}
+
+    /* Serviços */
+    .services{display:grid;gap:18px;grid-template-columns:repeat(3,minmax(0,1fr))}
+    .service{background:var(--card);border:1px solid var(--stroke);border-radius:var(--rad);padding:20px;box-shadow:var(--shadow)}
+    .service h3{margin:6px 0 8px}
+    .service p{color:var(--muted);font-size:.96rem}
+    .service .tag{display:inline-block;margin-top:10px;padding:6px 10px;border-radius:999px;background:#0f1420;border:1px dashed #2c3c56;font-size:.78rem;color:#b9c8e6}
+
+    /* Portfólio */
+    .grid-cards{display:grid;gap:18px;grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--rad);overflow:hidden;display:flex;flex-direction:column}
+    .card img{aspect-ratio:16/10;object-fit:cover}
+    .card .pad{padding:16px}
+    .card .title{font-weight:800}
+    .card .desc{color:var(--muted);font-size:.95rem;margin-top:6px}
+    .card .meta{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-top:1px solid #2a3349}
+    .link{display:inline-flex;gap:8px;align-items:center}
+
+    /* Depoimentos */
+    .testi{display:grid;gap:18px;grid-template-columns:repeat(3,minmax(0,1fr))}
+    .quote{background:var(--card);border:1px solid var(--stroke);border-radius:var(--rad);padding:20px;box-shadow:var(--shadow);position:relative}
+    .quote:before{content:"“";position:absolute;inset:auto auto 6px 12px;font-size:40px;color:#304263;opacity:.25}
+    .quote b{display:block;margin-bottom:8px}
+
+    /* Contato */
+    .contact{display:grid;gap:24px;grid-template-columns:1.2fr .8fr}
+    form{display:grid;gap:12px}
+    input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--stroke);background:#0f1420;color:#e6eeff}
+    textarea{min-height:120px;resize:vertical}
+    .form-note{font-size:.9rem;color:var(--muted)}
+
+    /* Footer */
+    footer{padding:28px 0;color:#94a6c9;text-align:center;border-top:1px solid rgba(255,255,255,.05)}
+
+    /* Utilities */
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s, transform .6s}
+    .reveal.show{opacity:1;transform:none}
+
+    /* ======= Responsive ======= */
+    @media (max-width:1024px){
+      .hero .grid{grid-template-columns:1fr}
+      .about{grid-template-columns:1fr}
+      .services,.grid-cards,.testi{grid-template-columns:repeat(2,1fr)}
+      .contact{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .menu{display:none;position:absolute;top:64px;right:20px;left:20px;background:#0e1420;border:1px solid var(--stroke);border-radius:14px;padding:14px;flex-direction:column}
+      .menu.open{display:flex}
+      .burger{display:flex}
+      .services,.grid-cards,.testi{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <span>Veiga • Softwares & IA</span>
+      </div>
+      <nav class="menu" id="menu">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato" class="cta">Fale comigo</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="grid">
+        <div>
+          <div class="chip reveal">🔧 <b>Softwares sob medida</b> • Apps • IA</div>
+          <h1 class="reveal" style="transition-delay:.06s">
+            Eu crio <em style="background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">soluções digitais</em> que trazem clientes e escalam o seu negócio.
+          </h1>
+          <p class="lead reveal" style="transition-delay:.1s">
+            Sites incríveis, aplicativos performáticos e inteligência artificial aplicada ao seu objetivo: vender mais, automatizar processos e impressionar.
+          </p>
+          <div class="buttons reveal" style="transition-delay:.14s">
+            <a href="#contato" class="btn primary">Solicitar proposta</a>
+            <a href="#portfolio" class="btn">Ver projetos</a>
+          </div>
+          <div class="badges reveal" style="transition-delay:.18s">
+            <span class="badge">Tempo de entrega enxuto</span>
+            <span class="badge">Design premium</span>
+            <span class="badge">Foco em ROI</span>
+          </div>
+        </div>
+        <div class="hero-visual reveal" style="transition-delay:.12s">
+          <div class="hero-card">
+            <img src="img/veiga.png" alt="Dashboard moderno" />
+            <div class="badges" style="margin-top:12px">
+              <span class="badge">Flutter • Python • Node</span>
+              <span class="badge">Firebase • MySQL</span>
+              <span class="badge">OpenAI • Vision</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre">
+    <div class="container">
+      <h2 class="section-title reveal">Sobre</h2>
+      <div class="about">
+        <div class="card reveal">
+          <p class="muted">Sou especialista em transformar ideias em produtos digitais reais: sites, apps e IAs que resolvem problemas e convertem.</p>
+          <ul class="muted">
+            <li>Arquitetura limpa e escalável</li>
+            <li>Interface bonita e focada em conversão</li>
+            <li>Entrega rápida e suporte próximo</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <div class="kpis">
+            <div class="kpi"><b>8+</b> projetos em produção</div>
+            <div class="kpi"><b>5⭐</b> feedback médio</div>
+            <div class="kpi"><b>99,9%</b> uptime nos apps</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section id="servicos">
+    <div class="container">
+      <h2 class="section-title reveal">Serviços</h2>
+      <div class="services">
+        <div class="service reveal">
+          <h3>Sites que vendem</h3>
+          <p>Landing pages e portfólios com SEO técnico, velocidade e design premium.</p>
+          <span class="tag">HTML • CSS • JS</span>
+        </div>
+        <div class="service reveal">
+          <h3>Aplicativos</h3>
+          <p>Apps Android/iOS com back-end robusto e integrações (pagamentos, mapas, câmera).</p>
+          <span class="tag">Flutter • Firebase • APIs</span>
+        </div>
+        <div class="service reveal">
+          <h3>Inteligência Artificial</h3>
+          <p>Chatbots, visão computacional e automações para reduzir custos e acelerar vendas.</p>
+          <span class="tag">Python • OpenAI • CV</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfólio -->
+  <section id="portfolio">
+    <div class="container">
+      <h2 class="section-title reveal">Portfólio</h2>
+      <p class="muted reveal">Alguns destaques. </p>
+      <div id="cards" class="grid-cards"></div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section id="depoimentos">
+    <div class="container">
+      <h2 class="section-title reveal">Depoimentos</h2>
+      <div class="testi">
+        <div class="quote reveal"><b>Marina • E-commerce</b> “Entrega rápida e design de alto nível. As vendas subiram em 3 semanas.”</div>
+        <div class="quote reveal"><b>Leonardo • SaaS</b> “Integrações complexas com um front perfeito. Recomendo!”</div>
+        <div class="quote reveal"><b>Rafael • Indústria</b> “Automatizamos rotinas e economizamos tempo e dinheiro.”</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato">
+    <div class="container">
+      <h2 class="section-title reveal">Fale comigo</h2>
+      <div class="contact">
+        <form class="reveal" id="contactForm">
+          <input type="text" name="name" placeholder="Seu nome*" required />
+          <input type="email" name="email" placeholder="Seu e-mail*" required />
+          <textarea name="message" placeholder="Conte sobre seu projeto*" required></textarea>
+          <button class="btn primary" type="submit">Enviar mensagem</button>
+          <p class="form-note">Ao enviar, você concorda com nossa política de privacidade.</p>
+          <p class="form-note" id="formStatus" aria-live="polite"></p>
+        </form>
+        <div class="reveal">
+          <div class="card" style="padding:20px">
+            <h3>Atendo Brasil inteiro 🇧🇷</h3>
+            <p class="muted">Preferências: projetos com metas claras e foco em resultado.</p>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+              <a class="link" href="mailto:vitor_veiga@yahoo.com.br">✉️ vitor_veiga@yahoo.com.br</a>
+              <a class="link" href="https://wa.me/5581992512747" target="_blank" rel="noopener">💬 WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Veiga. Todos os direitos reservados.</div>
+  </footer>
+
+  <script>
+    // ===== Menu hamburguer
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu');
+    burger.addEventListener('click', ()=> menu.classList.toggle('open'));
+
+    // ===== Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      })
+    },{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // ===== Portfólio: edite aqui seus projetos
+    // Coloque os arquivos dentro de /img, exatamente com esses nomes:
+    // optifleet.webp, pdv_veigas.webp, ia.webp
+    const projects = [
+      {
+        title:'OptiFleet • Rastreamento & Rotas',
+        desc:'SaaS com mapa em tempo real, telemetria e alertas.',
+        img:'img/optifleet.webp',
+        link:'https://www.optifleet.com.br'
+      },
+      {
+        title:'PDV Veigas • Frente de Caixa',
+        desc:'Vendas, estoque, relatórios e impressão ESC/POS.',
+        img:'img/pdv_veigas.webp',
+        link:'https://youtube.com/shorts/M9pI9uNqd_A?si=CYkfsrXUCzyHdDQk'
+        
+      },
+      {
+        title:'IA Vision • Detecção de Objetos',
+        desc:'Modelo otimizado para ambientes domésticos.',
+        img:'img/ia.webp',
+        link:'https://youtube.com/shorts/LqZ8Zjinv6E?si=Z1wV3OXtpWMlYr8Z'
+      
+      },
+    ];
+
+    const fallbackImg = 'https://picsum.photos/640/400?blur=1';
+
+    const cards = document.getElementById('cards');
+    cards.innerHTML = projects.map(p=> `
+      <article class="card reveal">
+        <img src="${p.img}" alt="${p.title}" loading="lazy"
+             onerror="this.onerror=null; console.warn('Imagem não encontrada:', this.src); this.src='${fallbackImg}';">
+        <div class="pad">
+          <div class="title">${p.title}</div>
+          <div class="desc">${p.desc}</div>
+        </div>
+        <div class="meta">
+          <a class="link" href="${p.link}" target="_blank" rel="noopener">Ver detalhes →</a>
+          <span class="muted">Projeto</span>
+        </div>
+      </article>
+    `).join('');
+
+    // ⭐ ADICIONE ISSO: observar os elementos criados depois
+  document.querySelectorAll('#cards .reveal').forEach(el => io.observe(el));
+
+    // ===== Formulário (exemplo sem backend)
+    const form = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formStatus.textContent = 'Enviando...';
+
+      const data = new FormData(form);
+
+      try {
+        const res = await fetch('https://formspree.io/f/xvgwlapy', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          formStatus.textContent = 'Mensagem enviada com sucesso! ✅';
+          form.reset();
+        } else {
+          const json = await res.json().catch(() => null);
+          const msg = json && json.errors
+            ? json.errors.map(e => e.message).join(', ')
+            : 'Erro ao enviar. Tente novamente.';
+          formStatus.textContent = msg + ' ❌';
+        }
+      } catch (error) {
+        formStatus.textContent = 'Falha de conexão. Verifique a internet e tente novamente. 🌐';
+      }
+    });
+
+
+    // ===== Ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
